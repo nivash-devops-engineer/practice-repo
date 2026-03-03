@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DevOps Health Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>🚀 DevOps Health Dashboard</h1>
+
+    <div class="card">
+        <p><strong>Hostname:</strong> <span id="hostname"></span></p>
+        <p><strong>Platform:</strong> <span id="platform"></span></p>
+        <p><strong>CPU Cores:</strong> <span id="cpu"></span></p>
+        <p><strong>Total Memory (MB):</strong> <span id="totalMemory"></span></p>
+        <p><strong>Free Memory (MB):</strong> <span id="freeMemory"></span></p>
+        <p><strong>Uptime (sec):</strong> <span id="uptime"></span></p>
+    </div>
+
+<script>
+async function loadData() {
+    const res = await fetch('/api/system');
+    const data = await res.json();
+
+    document.getElementById('hostname').innerText = data.hostname;
+    document.getElementById('platform').innerText = data.platform;
+    document.getElementById('cpu').innerText = data.cpu;
+    document.getElementById('totalMemory').innerText = data.totalMemory;
+    document.getElementById('freeMemory').innerText = data.freeMemory;
+    document.getElementById('uptime').innerText = data.uptime;
+}
+
+setInterval(loadData, 5000);
+loadData();
+</script>
+
+</body>
+</html>
